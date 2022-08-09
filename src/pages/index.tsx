@@ -1,15 +1,9 @@
 /** index.tsx */
 
-import {
-	GetServerSideProps,
-	GetStaticProps,
-	InferGetStaticPropsType,
-} from "next";
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 import PokeList from "../components/PokeList";
-// import PokeList from "../components/PokeList";
 
-const index: React.FC = ({ pokemon }: any) => {
+const index = ({ pokemon }: any) => {
 	// console.log(props.pokemon);
 
 	return (
