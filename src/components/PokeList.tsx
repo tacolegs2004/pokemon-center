@@ -2,17 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PokeList = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
-	console.log(pokemon);
+	// console.log(pokemon);
 
 	return (
 		<>
 			{pokemon.results.map((pokeman: any, index: number) => {
 				return (
 					<div className="w-6/12 h-6/12" key={index}>
-						<Link href={`/pokemon?id=${index}`}>
+						<Link href={`/pokemon?id=${encodeURIComponent(index)}`}>
 							<a className="border p-4 border-grey my-2 hover:shadow-md capitalize flex items-center text-lg bg-gray-200 rounded-md">
 								{/* <Image
-									src={pokeman.url}
+									src={pokeman.sprites.front_default}
 									alt={pokeman.name}
 									layout="fill"
 									className=" mr-3"

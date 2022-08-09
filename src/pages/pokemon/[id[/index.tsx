@@ -1,12 +1,23 @@
 import { GetStaticProps } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-const Index = ({ pokemon }: any) => {
-	return <h1>{pokemon.name}</h1>;
-};
+const Index = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
+	const router = useRouter();
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+	const { id } = router.query;
+	const ids = pokemon.results.map(
+		(poke: { poke: any; ids: number }) => poke?.ids.toString() === id
+	);
+
+	{
+		pokemon.results.map((pokeman: any) => {
+			return <h1>{pokeman.name}</h1>;
+		});
+	}
+};
+export const getStaticProps = async (ctx: any) => {
 	const res = await fetch(`https://pokeapi.co/api/v2/${ctx.params?.id}`);
 	const pokemon = await res.json();
 
