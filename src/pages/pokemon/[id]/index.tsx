@@ -7,15 +7,13 @@ const Index = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
 	const router = useRouter();
 
 	const { id } = router.query;
-	const ids = pokemon.results.map(
-		(poke: { poke: any; ids: number }) => poke?.ids.toString() === id
-	);
 
-	{
-		pokemon.results.map((pokeman: any) => {
-			return <h1>{pokeman.name}</h1>;
-		});
-	}
+	// {
+	// 	ids.map((pokeman: any) => {
+	// 		return <h1>{pokeman.name}</h1>;
+	// 	});
+	// }
+	return <h1>Post: {id}</h1>;
 };
 export const getStaticProps = async (ctx: any) => {
 	const res = await fetch(`https://pokeapi.co/api/v2/${ctx.params?.id}`);
