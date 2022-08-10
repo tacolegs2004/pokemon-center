@@ -8,7 +8,7 @@ const PokeList = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
 		<>
 			{pokemon.results.map((pokeman: any, index: number) => {
 				return (
-					<Link className="" href={`/pokemon?id=${index}`}>
+					<Link key={index} className="" href={`/pokemon/${index}`}>
 						<a>
 							{/* <Image
 									src={pokeman.sprites.front_default}
@@ -16,9 +16,11 @@ const PokeList = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
 									layout="fill"
 									className=" mr-3"
 								/> */}
-							<span className="mr-2 font-bold flex flex-row">
-								{index + 1}. {pokeman.name}
-							</span>
+							<ol>
+								<li>
+									{index + 1}. {pokeman.name}
+								</li>
+							</ol>
 						</a>
 					</Link>
 				);

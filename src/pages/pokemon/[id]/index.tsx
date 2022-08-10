@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-const Index = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
+const index = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
 	const router = useRouter();
 
 	const { id } = router.query;
@@ -16,8 +16,16 @@ const Index = ({ pokemon }: { pokemon: { results: Array<any> } }) => {
 	// 		return <h1>{pokeman.name}</h1>;
 	// 	});
 	// }
-	return <h1>Post: {id}</h1>;
+
+	return (
+		<>
+			{pokemon.results.map((pokeman: any, index: number) => {
+				return <h1>{pokeman.results.name}</h1>;
+			})}
+		</>
+	);
 };
+
 export const getStaticProps: GetStaticProps = async (ctx) => {
 	const res = await fetch(`https://pokeapi.co/api/v2/${ctx.params?.id}`);
 	const pokemon = await res.json();
@@ -27,14 +35,16 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 	};
 };
 
-export const getStaticPaths: GetStaticPaths = async (ctx) => {
+export const getStaticPaths = async () => {
 	const res = await fetch("https://pokeapi.co/api/v2/pokemon");
 	const pokemon = await res.json();
 
 	return {
-		paths: [{ params: { id: pokemon?.id?.toString() } }],
-		fallback: false, // can also be true or 'blocking'
+		paths: Array.from({ length: 151 }, (idx: number) => ({
+			params: { id: String(idx + 1) },
+		})),
+		fallback: false,
 	};
 };
 
-export default Index;
+export default index;
